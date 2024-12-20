@@ -1,0 +1,100 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: opochuev <opochuev@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/25 18:15:49 by opochuev          #+#    #+#              #
+#    Updated: 2024/01/31 16:54:29 by opochuev         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: alonshak <alonshak@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/15 19:43:33 by alonshak          #+#    #+#              #
+#    Updated: 2024/01/24 14:35:19 by alonshak         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libft.a
+FLAGS = -Wall -Wextra -Werror
+SRCS	=	ft_atoi.c \
+			ft_bzero.c \
+			ft_calloc.c \
+			ft_isalnum.c \
+			ft_isalpha.c \
+			ft_isascii.c \
+			ft_isdigit.c \
+			ft_isprint.c \
+			ft_itoa.c \
+			ft_memchr.c \
+			ft_memcmp.c \
+			ft_memcpy.c \
+			ft_memmove.c \
+			ft_memset.c \
+			ft_putchar_fd.c \
+			ft_putendl_fd.c \
+			ft_putnbr_fd.c \
+			ft_putstr_fd.c \
+			ft_split.c \
+			ft_strchr.c \
+			ft_strdup.c \
+			ft_striteri.c \
+			ft_strjoin.c \
+			ft_strlcat.c \
+			ft_strlcpy.c \
+			ft_strlen.c \
+			ft_strmapi.c \
+			ft_strncmp.c \
+			ft_strnstr.c \
+			ft_strrchr.c \
+			ft_strtrim.c \
+			ft_substr.c \
+			ft_tolower.c \
+			ft_toupper.c \
+
+SRCS_B =    ft_lstadd_back.c \
+			ft_lstadd_front.c \
+			ft_lstclear.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstlast.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstsize.c
+OBJS = $(SRCS:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
+RM = rm -f
+LIBC = ar -rcs
+INCS = .
+
+%.o: %.c libft.h Makefile
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I${INCS}
+
+$(NAME): ${OBJS}
+	${LIBC} $(NAME) $(OBJS)
+
+all: $(NAME)
+	@echo "Main part compiled successfully."
+
+#bonus: $(NAME) $(OBJS_B)
+#	${LIBC} $(NAME) $(OBJS_B)
+#@echo "Bonus part compiled successfully."
+
+fclean: clean
+	$(RM) -f $(NAME)
+
+clean:
+	$(RM) -f $(OBJS) $(OBJS_B)
+
+re: 
+	$(MAKE) fclean
+	$(MAKE) all
+
+.PHONY: all bonus clean fclean re 
